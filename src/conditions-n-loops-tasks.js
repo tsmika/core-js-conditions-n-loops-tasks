@@ -346,8 +346,19 @@ function isContainNumber(num, digit) {
  *  [2, 3, 9, 5] => 2       => 2 + 3 === 5 then balance element is 9 and its index = 2
  *  [1, 2, 3, 4, 5] => -1   => no balance element
  */
-function getBalanceIndex(/* arr */) {
-  throw new Error('Not implemented');
+function getBalanceIndex(arr) {
+  for (let i = 0; i < arr.length - 1; i += 1) {
+    let sumBefore = 0;
+    for (let j = 0; j < i; j += 1) {
+      sumBefore += arr[j];
+    }
+    let sumAfter = 0;
+    for (let k = i + 1; k < arr.length; k += 1) {
+      sumAfter += arr[k];
+    }
+    if (sumAfter === sumBefore) return i;
+  }
+  return -1;
 }
 
 /**
@@ -371,8 +382,42 @@ function getBalanceIndex(/* arr */) {
  *          [10, 9,  8,  7]
  *        ]
  */
-function getSpiralMatrix(/* size */) {
-  throw new Error('Not implemented');
+function getSpiralMatrix(size) {
+  const matrix = [size];
+  for (let i = 0; i < size; i += 1) {
+    matrix[i] = [size];
+  }
+  let currentValue = 1;
+  let currentTopRow = 0;
+  let currentBottomRow = size - 1;
+  let currentLeftColumn = 0;
+  let currentRightColumn = size - 1;
+  while (
+    currentTopRow <= currentBottomRow &&
+    currentLeftColumn <= currentRightColumn
+  ) {
+    for (let i = currentLeftColumn; i <= currentRightColumn; i += 1) {
+      matrix[currentTopRow][i] = currentValue;
+      currentValue += 1;
+    }
+    currentTopRow += 1;
+    for (let i = currentTopRow; i <= currentBottomRow; i += 1) {
+      matrix[i][currentRightColumn] = currentValue;
+      currentValue += 1;
+    }
+    currentRightColumn -= 1;
+    for (let i = currentRightColumn; i >= currentLeftColumn; i -= 1) {
+      matrix[currentBottomRow][i] = currentValue;
+      currentValue += 1;
+    }
+    currentBottomRow -= 1;
+    for (let i = currentBottomRow; i >= currentTopRow; i -= 1) {
+      matrix[i][currentLeftColumn] = currentValue;
+      currentValue += 1;
+    }
+    currentLeftColumn += 1;
+  }
+  return matrix;
 }
 
 /**
