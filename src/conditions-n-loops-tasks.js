@@ -435,8 +435,24 @@ function getSpiralMatrix(size) {
  *    [7, 8, 9]         [9, 6, 3]
  *  ]                 ]
  */
-function rotateMatrix(/* matrix */) {
-  throw new Error('Not implemented');
+function rotateMatrix(matrix) {
+  const matrixTmp = matrix;
+  const n = matrix.length;
+
+  for (let i = 0; i < n; i += 1) {
+    for (let j = i; j < n; j += 1) {
+      [matrixTmp[i][j], matrixTmp[j][i]] = [matrixTmp[j][i], matrixTmp[i][j]];
+    }
+  }
+
+  for (let i = 0; i < n; i += 1) {
+    for (let j = 0; j < Math.floor(n / 2); j += 1) {
+      [matrixTmp[i][j], matrixTmp[i][n - 1 - j]] = [
+        matrixTmp[i][n - 1 - j],
+        matrixTmp[i][j],
+      ];
+    }
+  }
 }
 
 /**
@@ -453,7 +469,26 @@ function rotateMatrix(/* matrix */) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
-function sortByAsc(/* arr */) {
+
+// function ascendingSort(array) {
+//   if (array.length < 2) return array;
+
+//   const left = [];
+//   const right = [];
+//   const pivot = array[0];
+
+//   for (let i = 1; i < array.length; i += 1) {
+//     if (array[i] < pivot) {
+//       left.push(array[i]);
+//     } else {
+//       right.push(array[i]);
+//     }
+//   }
+
+//   return [...ascendingSort(left), pivot, ...ascendingSort(right)];
+// }
+
+function sortByAsc(/*  arr  */) {
   throw new Error('Not implemented');
 }
 
